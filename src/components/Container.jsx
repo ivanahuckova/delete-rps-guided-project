@@ -6,17 +6,32 @@ import WeaponSelector from './WeaponSelector';
 
 export default class Container extends React.Component {
   // container holds state of application
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentWeapons: { computer: 'Rock', user: 'Scissors' },
+      score: { computer: 34, user: 25 },
+      fightHistory: [0, 1, 2, 0],
+      message: 'You won!',
+    };
+  }
+
+  play(weapon) {
+    console.log(weapon);
+  }
+
   render() {
     return (
       <div className="container">
         <Header />
-        <History history={[0, 1, 2, 0]} />
+        <History history={this.state.fightHistory} />
         <MainBoard
-          score={{ computer: 34, user: 25 }}
-          currentWeapons={{ computer: 'Rock', user: 'Paper' }}
-          message="You won!"
+          score={this.state.score}
+          currentWeapons={this.state.currentWeapons}
+          message={this.state.message}
         />
-        <WeaponSelector />
+        <WeaponSelector play={this.play.bind(this)} />
       </div>
     );
   }
