@@ -10,7 +10,7 @@ export default class Container extends React.Component {
     return (
       <div className="container">
         <Header />
-        <History />
+        <History history={[0, 1, 2, 0]} />
         <MainBoard />
         <WeaponSelector />
       </div>
