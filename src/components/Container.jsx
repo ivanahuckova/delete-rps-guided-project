@@ -11,7 +11,11 @@ export default class Container extends React.Component {
       <div className="container">
         <Header />
         <History history={[0, 1, 2, 0]} />
-        <MainBoard />
+        <MainBoard
+          score={{ computer: 34, user: 25 }}
+          currentWeapons={{ computer: 'Rock', user: 'Paper' }}
+          message="You won!"
+        />
         <WeaponSelector />
       </div>
     );
