@@ -5,8 +5,8 @@ import MainBoard from './MainBoard';
 import WeaponSelector from './WeaponSelector';
 
 export default class Container extends React.Component {
+  // container holds state of application
   render() {
-    // container holds state of application
     return (
       <div className="container">
         <Header />

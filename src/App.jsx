@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from './components/Container';
 /*
 state lives in outer most container!!
 <container> => STATE LIVES HERE!
@@ -10,4 +11,4 @@ state lives in outer most container!!
 <container>
 */
 
-ReactDOM.render(<div>Rock Paper Scissors</div>, document.querySelector('#target'));
+ReactDOM.render(<Container />, document.querySelector('#target'));
