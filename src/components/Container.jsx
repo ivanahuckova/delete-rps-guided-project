@@ -17,9 +17,30 @@ export default class Container extends React.Component {
     };
   }
 
-  play(weapon) {
-    console.log(weapon);
+  updateCurrentWeapons(userWeapon, computerWeapon) {
+    this.setState({ currentWeapons: { user: userWeapon, computer: computerWeapon } });
   }
+
+  updateScoreTie() {
+    this.setState(state => ({
+      score: { user: state.score.user + 1, computer: state.score.computer + 1 },
+    }));
+  }
+
+  updateScoreWin(fighter) {
+    this.setState(state => ({
+      ...state.score,
+      [fighter]: state.score[fighter] + 2,
+    }));
+  }
+
+  message(newMessage) {
+    this.setState({
+      message: newMessage,
+    });
+  }
+
+  play(weapon) {}
 
   render() {
     return (
