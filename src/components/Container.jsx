@@ -10,11 +10,12 @@ export default class Container extends React.Component {
     super(props);
 
     this.state = {
-      currentWeapons: { computer: 'Rock', user: 'Scissors' },
-      score: { computer: 34, user: 25 },
-      fightHistory: [0, 1, 2, 0],
-      message: 'You won!',
+      currentWeapons: { computer: null, user: null },
+      score: { computer: 0, user: 0 },
+      fightHistory: [],
+      message: null,
     };
+    this.play = this.play.bind(this);
   }
 
   updateCurrentWeapons(userWeapon, computerWeapon) {
@@ -29,18 +30,46 @@ export default class Container extends React.Component {
 
   updateScoreWin(fighter) {
     this.setState(state => ({
-      ...state.score,
-      [fighter]: state.score[fighter] + 2,
+      score: { ...state.score, [fighter]: state.score[fighter] + 2 },
     }));
   }
 
-  message(newMessage) {
-    this.setState({
-      message: newMessage,
-    });
+  setMessage(message) {
+    this.setState({ message });
   }
 
-  play(weapon) {}
+  fightHistoryUpdater(point) {
+    this.setState(st => ({
+      fightHistory: [...st.fightHistory, point],
+    }));
+  }
+
+  play(weapon) {
+    const randomNumber = Math.floor(Math.random() * 3);
+    const randomWeapon = ['Rock', 'Paper', 'Scissors'][randomNumber];
+    this.updateCurrentWeapons(weapon, randomWeapon);
+
+    const tie = weapon === randomWeapon;
+
+    const win =
+			(weapon === 'Rock' && randomWeapon === 'Scissors') ||
+			(weapon === 'Paper' && randomWeapon === 'Rock') ||
+			(weapon === 'Scissors' && randomWeapon === 'Paper');
+
+    if (win) {
+      this.updateScoreWin('user');
+      this.fightHistoryUpdater(2);
+      this.setMessage('You win!');
+    } else if (tie) {
+      this.updateScoreTie();
+      this.fightHistoryUpdater(1);
+      this.setMessage('Tie!');
+    } else {
+      this.updateScoreWin('computer');
+      this.fightHistoryUpdater(0);
+      this.setMessage('You lost');
+    }
+  }
 
   render() {
     return (
